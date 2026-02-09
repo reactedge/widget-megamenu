@@ -1,0 +1,21 @@
+{
+  "summary_count": 4,
+  "items": [
+    {
+      "item_id": 101,
+      "sku": "MH12-GREEN",
+      "name": "Ajax Full-Zip Sweatshirt",
+      "qty": 2,
+      "price": 29.99,
+      "thumbnail": "https://via.placeholder.com/80"
+    },
+    {
+      "item_id": 102,
+      "sku": "JKT-RED",
+      "name": "Warm Winter Jacket",
+      "qty": 2,
+      "price": 89.50,
+      "thumbnail": "https://via.placeholder.com/80"
+    }
+  ]
+}
