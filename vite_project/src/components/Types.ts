@@ -15,6 +15,8 @@ export type Translations = {
 };
 
 export type MegaMenuConfig = {
+    data: { items: NavItem[]}
+    platform: string;
     dataLocale?: string;
     fontColor?: string;
     primaryColor?: string;

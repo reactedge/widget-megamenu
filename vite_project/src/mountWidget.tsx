@@ -1,34 +1,28 @@
 import { createRoot } from "react-dom/client";
 import {loadMagentoMegaMenu} from "./adapters/magento/loadMagentoMenu.ts";
 import {MegamenuWidget} from "./MegamenuWidget.tsx";
-import type {NavItem} from "./contracts/NavItem.ts";
-import { storeFinderStyles } from "./styles/megamenu.styles";
-import {injectStyles} from "./lib/style.ts";
+import {extractConfig} from "./services/configLoader.ts";
+import {activity} from "./activity";
+import {getMountedHost} from "./lib/hostReader.ts";
+import {ensureGlobalStyle} from "./lib/style.ts";
 
 export async function mountWidget(hostElement: HTMLElement) {
-    // Create shadow DOM
-    const shadow =
-        hostElement.shadowRoot || hostElement.attachShadow({ mode: "open" });
+    const mountedHost = getMountedHost(hostElement);
+    const config = extractConfig(hostElement);
 
-    for (const css of storeFinderStyles) {
-        injectStyles(shadow, css);
-    }
+    activity('bootstrap', 'Widget mounted', config);
 
-    const root = createRoot(shadow);
+    ensureGlobalStyle('reactedge-megamenu-css', '/widget/megamenu.css');
 
-    // Create React root inside shadow
-    const host = hostElement.getAttribute("data-host");
+    const root = createRoot(mountedHost);
 
-    if (host === 'magento') {
+    if (config.platform === 'magento') {
         root.render(<MegamenuWidget items={[]} loading />);
         const items = await loadMagentoMegaMenu();
         root.render(<MegamenuWidget items={items} />);
     }
 
-    if (host === 'wordpress') {
-        const raw = hostElement.getAttribute("data-items");
-        const items: NavItem[] = raw ? JSON.parse(raw) : [];
-
-        root.render(<MegamenuWidget items={items} />);
+    if (config.platform === 'wordpress') {
+        root.render(<MegamenuWidget items={config.data.items} />);
     }
 }

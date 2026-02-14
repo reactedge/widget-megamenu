@@ -1,13 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>USP Widget Fixture</title>
+
+    <!-- Load built widget bundle -->
+    <script type="module" src="/dist/widget-megamenu.iife.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
 <body>
-<script type="module" src="./src/widget.ts"></script>
 
 <megamenu-widget
         data-instance="main-nav">
     <script type="application/json" data-config>
         {
-            "runtime": {
-                "platform": "wordpress"
-            },
             "data": {
                 "items": [
                     {
@@ -65,4 +78,6 @@
 
     <div class="widget-spinner"></div>
 </megamenu-widget>
+
 </body>
+</html>

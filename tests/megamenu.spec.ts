@@ -5,7 +5,7 @@ test.describe('Megamenu widget (WordPress embed)', () => {
         await page.goto('/fixtures/megamenu.wordpress.html');
     });
 
-    test('USP widget mounts', async ({page}) => {
+    test('Megamenu widget mounts', async ({page}) => {
         const widget = page.locator('megamenu-widget');
         await expect(widget).toBeAttached();
     });

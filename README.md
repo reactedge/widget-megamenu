@@ -59,3 +59,8 @@ Embed the widget by including the custom element and pointing it to a **versione
 | **Static site**        | Load page → widget JS `200` → menu renders from remote JSON                 | No server-side integration required.                                                    |
 | **Widget host domain** | Network tab shows widget JS loaded once, no duplicate execution             | Widget should remain side-effect free outside its mount point.                          |
 
+
+To run the test suite:
+```bash
+npx playwright test --config=tests/playwright.dev.config.ts
+```
