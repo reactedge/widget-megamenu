@@ -1,9 +1,9 @@
 import {ParentMenuItem} from "./ParentMenuItem.tsx";
 import {ItemLink} from "./Megamenu/ItemLink.tsx";
-import type {NavItem} from "../contracts/NavItem.ts";
 import {buildCategoryUrl, isInBreadCrumb} from "../lib/url.ts";
-import {useWidgetConfig} from "../hooks/useWidgetConfig.ts";
 import {CtaItemLink} from "./Megamenu/CtaItemLink.tsx";
+import type {NavItem} from "../domain/megamenu.types.ts";
+import {useConfigState} from "../state/Config/useConfigState.ts";
 
 type MenuItemProps = {
     item: NavItem;
@@ -14,8 +14,8 @@ type MenuItemProps = {
 
 export function MenuItem(props: MenuItemProps) {
     const { item, isActive, isParent, hasSubmenu } = props;
-    const config = useWidgetConfig();
-    const url = buildCategoryUrl(item.url, config);
+    const {settings} = useConfigState();
+    const url = buildCategoryUrl(item.url, settings);
 
     if (!url) return null;
 

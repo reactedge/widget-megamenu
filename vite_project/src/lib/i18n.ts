@@ -1,4 +1,4 @@
-import type {Translations} from "../components/Types.ts";
+import type {Translations} from "../domain/Types.ts";
 
 let translations: Translations = {};
 

@@ -1,7 +1,6 @@
-import type {NavItem} from "../../contracts/NavItem.ts";
-import type {MegaMenuResponse} from "../../components/Types.ts";
 import {graphqlFetch} from "./graphql/fetcher.ts";
 import {normaliseMagentoCategories} from "./graphql/mapper.ts";
+import type {MegaMenuResponse, NavItem} from "../../domain/megamenu.types.ts";
 
 export const MEGAMENU_QUERY = `
     query MegaMenuCategories {

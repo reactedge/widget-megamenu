@@ -1,10 +1,8 @@
 import { isActivityEnabled } from './activity.guard';
+import {WIDGET_ID} from "../MegamenuWidget.tsx";
 
 type Level = 'info' | 'warn' | 'error';
 
-/*
-Banner widget activity phases:
-*/
 export function activity(
     phase: string,
     message: string,
@@ -14,14 +12,14 @@ export function activity(
     if (!isActivityEnabled()) return;
 
     const payload = {
-        widget: 'megamenu',
+        widget: `${WIDGET_ID}`,
         phase,
         message,
         data,
         ts: Date.now(),
     };
 
-    const prefix = `[RE:contact] [${phase}]`;
+    const prefix = `${phase}`;
 
     if (level === 'error') {
         console.error(prefix, payload);

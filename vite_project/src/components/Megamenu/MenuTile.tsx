@@ -1,20 +1,20 @@
 import {useState} from "react";
-import type {CategoryNode} from "../Types.ts";
-import {useWidgetConfig} from "../../hooks/useWidgetConfig.ts";
 import {buildCategoryUrl} from "../../lib/url.ts";
 import {styles} from "./style.ts";
+import type {NavItem} from "../../domain/megamenu.types.ts";
+import {useConfigState} from "../../state/Config/useConfigState.ts";
 
 type MenuTileProps = {
-    item: CategoryNode;
+    item: NavItem;
 };
 
 export function MenuTile({ item }: MenuTileProps) {
     const [hovered, setHovered] = useState(false);
-    const config = useWidgetConfig();
+    const {settings} = useConfigState();
 
     return (
         <a
-            href={buildCategoryUrl(item.url, config)}
+            href={buildCategoryUrl(item.url, settings)}
             style={{
                 ...styles.tile,
                 ...(hovered ? styles.tileHover : {})

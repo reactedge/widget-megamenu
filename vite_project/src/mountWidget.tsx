@@ -5,6 +5,8 @@ import {extractConfig} from "./services/configLoader.ts";
 import {activity} from "./activity";
 import {getMountedHost} from "./lib/hostReader.ts";
 import {ensureGlobalStyle} from "./lib/style.ts";
+import {Loading} from "./components/Loading.tsx";
+import {ConfigStateProvider} from "./state/Config/ConfigStateProvider.tsx";
 
 export async function mountWidget(hostElement: HTMLElement) {
     const mountedHost = getMountedHost(hostElement);
@@ -16,13 +18,23 @@ export async function mountWidget(hostElement: HTMLElement) {
 
     const root = createRoot(mountedHost);
 
-    if (config.platform === 'magento') {
-        root.render(<MegamenuWidget items={[]} loading />);
-        const items = await loadMagentoMegaMenu();
-        root.render(<MegamenuWidget items={items} />);
+    let items
+
+    if (config.runtime.platform === 'magento') {
+        root.render(<Loading />);
+        items = await loadMagentoMegaMenu();
+        if (items===undefined) {
+            return
+        }
     }
 
-    if (config.platform === 'wordpress') {
-        root.render(<MegamenuWidget items={config.data.items} />);
+    if (config.runtime.platform === 'wordpress') {
+        items = config.data.items;
     }
+
+    root.render(
+        <ConfigStateProvider settings={config.settings}>
+            <MegamenuWidget items={items} />
+        </ConfigStateProvider>
+    );
 }

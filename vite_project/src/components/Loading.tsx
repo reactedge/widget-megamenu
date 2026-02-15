@@ -1,14 +1,15 @@
-import {useWidgetConfig} from "../hooks/useWidgetConfig.ts";
+
 import {loadingStyle, spinnerStyle} from "./Megamenu/Loading.ts";
+import {useConfigState} from "../state/Config/useConfigState.ts";
 
 export function Loading() {
-    const config = useWidgetConfig();
+    const {settings} = useConfigState();
 
     return (
         <div style={loadingStyle}>
             <div style={{
                 ...spinnerStyle,
-                borderTopColor: config.primaryColor
+                borderTopColor: settings?.primaryColor
             }} />
         </div>
     );

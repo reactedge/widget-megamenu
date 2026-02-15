@@ -1,6 +1,6 @@
-import {useWidgetConfig} from "../../hooks/useWidgetConfig.ts";
 import {buildCategoryUrl} from "../../lib/url.ts";
 import {renderIcon} from "./Icon.tsx";
+import {useConfigState} from "../../state/Config/useConfigState.ts";
 
 interface CtaLinkProps {
     url?: string;
@@ -9,11 +9,11 @@ interface CtaLinkProps {
 }
 
 export function CtaItemLink({ url, label, icon }: CtaLinkProps) {
-    const config = useWidgetConfig();
+    const {settings} = useConfigState();
 
     return (
         <a
-            href={buildCategoryUrl(url, config)}
+            href={buildCategoryUrl(url, settings)}
             className="mw-cta-link"
         >
             <span className="mw-cta-link__label">{label}</span>

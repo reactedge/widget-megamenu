@@ -1,4 +1,4 @@
-import type {MegaMenuConfig} from "../components/Types.ts";
+import type {MegaMenuConfig} from "../domain/Types.ts";
 import type {NavItem} from "../contracts/NavItem.ts";
 
 export function buildCategoryUrl(

@@ -1,4 +1,4 @@
-import type {CategoryNode, MegaMenuConfig, MenuType} from "../components/Types.ts";
+import type {CategoryNode, MegaMenuConfig, MenuType} from "../domain/Types.ts";
 
 export function resolveDropdownLayout(
     categoryUrl: string | undefined,

@@ -1,5 +1,5 @@
 import {MenuItem} from "../MenuItem.tsx";
-import type {NavItem} from "../../contracts/NavItem.ts";
+import type {NavItem} from "../../domain/megamenu.types.ts";
 
 interface MenuProps {
     label: string;

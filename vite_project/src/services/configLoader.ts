@@ -1,29 +1,66 @@
-import type {MegaMenuConfig} from "../components/Types.ts";
+import type {MegaMenuWidgetConfig} from "../domain/megamenu.types.ts";
+import {WIDGET_ID} from "../MegamenuWidget.tsx";
 
-export function extractConfig(hostElement: HTMLElement): MegaMenuConfig {
+export function extractConfig(hostElement: HTMLElement): MegaMenuWidgetConfig {
     const configScript = hostElement.querySelector<HTMLScriptElement>(
         'script[type="application/json"][data-config]'
     );
 
-    if (!configScript) {
-        throw new Error("USP widget requires a <script data-config> block.");
+    if (!configScript?.textContent) {
+        throw new Error(`[${WIDGET_ID}] requires a <script type="application/json" data-config> block.`);
     }
 
+    let parsed: unknown;
     try {
-        const parsed = JSON.parse(configScript.textContent || "{}");
-
-        return {
-            data: parsed.data ?? { items: [] },
-            platform: parsed.runtime.platform,
-            dataLocale: parsed.runtime.locale,
-            fontColor: parsed.settings.theme.fontColor,
-            primaryColor: parsed.settings.theme.primaryColor,
-            secondaryColour: parsed.settings.theme.secondaryColour,
-            urlSuffix: parsed.runtime.urlSuffix,
-            dropdownLayouts: parsed.runtime.dropdownLayouts
-        };
-
-    } catch (err) {
-        throw new Error("Invalid JSON inside <usp-widget> data-config block.");
+        parsed = JSON.parse(configScript.textContent);
+    } catch {
+        throw new Error(`[${WIDGET_ID}] invalid JSON inside <script data-config>.`);
     }
+
+    if (!isMegaMenuWidgetConfig(parsed)) {
+        throw new Error(`[${WIDGET_ID}] <script data-config> does not match MegaMenuWidgetConfig.`);
+    }
+
+    return Object.freeze(parsed);
+}
+
+function isMegaMenuWidgetConfig(value: unknown): value is MegaMenuWidgetConfig {
+    if (!isObject(value)) return false;
+
+    const data = (value as any).data;
+    if (!isObject(data)) return false;
+
+    const items = (data as any).items;
+    if (!Array.isArray(items)) return false;
+
+    if (!items.every(isMegaMenuItem)) return false;
+
+    // settings is optional, but if present validate the parts you actually use
+    const settings = (value as any).settings;
+    if (settings !== undefined && !isObject(settings)) return false;
+
+    return true;
+}
+
+function isMegaMenuItem(value: unknown): boolean {
+    if (!isObject(value)) return false;
+
+    const v = value as any;
+    if (typeof v.id !== 'string') return false;
+    if (typeof v.label !== 'string') return false;
+    if (typeof v.url !== 'string') return false;
+
+    if (!Array.isArray(v.children)) return false;
+    if (!v.children.every(isMegaMenuItem)) return false;
+
+    if (v.meta !== undefined) {
+        if (!isObject(v.meta)) return false;
+        if (v.meta.type !== undefined && typeof v.meta.type !== 'string') return false; // or restrict to 'cta'
+    }
+
+    return true;
+}
+
+function isObject(x: unknown): x is Record<string, unknown> {
+    return typeof x === 'object' && x !== null;
 }
