@@ -1,5 +1,5 @@
 import type {MegaMenuWidgetConfig} from "../domain/megamenu.types.ts";
-import {WIDGET_ID} from "../MegamenuWidget.tsx";
+import {WIDGET_ID} from "../mountWidget.tsx";
 
 export function extractConfig(hostElement: HTMLElement): MegaMenuWidgetConfig {
     const configScript = hostElement.querySelector<HTMLScriptElement>(

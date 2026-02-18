@@ -23,6 +23,10 @@ export type MegaMenuSettingsConfig = {
     fontColor?: string;
     primaryColor?: string;
     secondaryColour?: string;
+    urlSuffix?: string;
+    dropdownLayouts?: {
+        [urlPath: string]: "list" | "tiles";
+    };
 };
 
 export type MenuType =

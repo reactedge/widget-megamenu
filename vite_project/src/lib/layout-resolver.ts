@@ -1,16 +1,16 @@
-import type {CategoryNode, MegaMenuConfig, MenuType} from "../domain/Types.ts";
+import type {MegaMenuSettingsConfig, MenuType, NavItem} from "../domain/megamenu.types.ts";
 
 export function resolveDropdownLayout(
     categoryUrl: string | undefined,
-    config: MegaMenuConfig
+    config: MegaMenuSettingsConfig | undefined
 ): "list" | "tiles" {
     if (!categoryUrl) return "list";
 
-    return config.dropdownLayouts?.[categoryUrl] ?? "list";
+    return config?.dropdownLayouts?.[categoryUrl] ?? "list";
 }
 
 export function getMenuType(
-    level1: CategoryNode,
+    level1: NavItem,
     layout: "list" | "tiles"
 ): MenuType {
     const hasChildren = !!level1.children?.length;

@@ -13,9 +13,9 @@
     left: 0;
     min-width: 400px;
     max-width: 800px;
-    background-color: #fff;
     padding: 16px 20px;
     z-index: 1000;
+    background: white;
 }
 
 .mw-megamenu-item.is-active > .mw-megamenu-dropdown {

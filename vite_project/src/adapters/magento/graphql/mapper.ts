@@ -1,4 +1,4 @@
-import type {NavItem} from "../../../contracts/NavItem.ts";
+import type {NavItem} from "../../../domain/megamenu.types.ts";
 
 export function normaliseMagentoCategories(categories: any[]): NavItem[] {
     return categories.map(cat => ({

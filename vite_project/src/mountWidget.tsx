@@ -4,17 +4,17 @@ import {MegamenuWidget} from "./MegamenuWidget.tsx";
 import {extractConfig} from "./services/configLoader.ts";
 import {activity} from "./activity";
 import {getMountedHost} from "./lib/hostReader.ts";
-import {ensureGlobalStyle} from "./lib/style.ts";
 import {Loading} from "./components/Loading.tsx";
 import {ConfigStateProvider} from "./state/Config/ConfigStateProvider.tsx";
+
+export const WIDGET_ID = 'megamenu';
 
 export async function mountWidget(hostElement: HTMLElement) {
     const mountedHost = getMountedHost(hostElement);
     const config = extractConfig(hostElement);
+    hostElement.classList.add(`reactedge-${WIDGET_ID}`);
 
     activity('bootstrap', 'Widget mounted', config);
-
-    ensureGlobalStyle('reactedge-megamenu-css', '/widget/megamenu.css');
 
     const root = createRoot(mountedHost);
 
@@ -32,9 +32,7 @@ export async function mountWidget(hostElement: HTMLElement) {
         items = config.data.items;
     }
 
-    root.render(
-        <ConfigStateProvider settings={config.settings}>
-            <MegamenuWidget items={items} />
-        </ConfigStateProvider>
-    );
+    root.render(<ConfigStateProvider settings={config.settings}>
+                <MegamenuWidget items={items} />
+            </ConfigStateProvider>);
 }

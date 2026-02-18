@@ -1,4 +1,4 @@
-import type {Translations} from "../domain/Types.ts";
+import type {Translations} from "../domain/megamenu.types.ts";
 
 let translations: Translations = {};
 

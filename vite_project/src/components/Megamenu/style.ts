@@ -79,7 +79,6 @@ export const styles: Record<string, CSSProperties> = {
         position: "absolute",
         top: "100%",
         left: 0,
-        backgroundColor: "#fff",
         border: "1px solid #e5e5e5",
         padding: "16px 20px",
         display: "flex",

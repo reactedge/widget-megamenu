@@ -1,13 +1,12 @@
-import type {MegaMenuConfig} from "../domain/Types.ts";
-import type {NavItem} from "../contracts/NavItem.ts";
+import type {MegaMenuSettingsConfig, NavItem} from "../domain/megamenu.types.ts";
 
 export function buildCategoryUrl(
     url: string | undefined,
-    config: MegaMenuConfig
+    config: MegaMenuSettingsConfig | undefined
 ): string | undefined {
     if (!url) return undefined;
 
-    const suffix = config.urlSuffix ?? "";
+    const suffix = config?.urlSuffix ?? "";
     return `${url}${suffix}`;
 }
 

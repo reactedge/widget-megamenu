@@ -1,7 +1,7 @@
 // mounts/mountWordPress.ts
 import { createRoot } from "react-dom/client";
-import type {NavItem} from "../contracts/NavItem.ts";
 import {MegamenuWidget} from "../MegamenuWidget.tsx";
+import type {NavItem} from "../domain/megamenu.types.ts";
 
 export function mountWordPress(hostElement: HTMLElement) {
     const shadow =

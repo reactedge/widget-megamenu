@@ -14,7 +14,7 @@ export function DesktopMegamenu({ items, loading = false }: MegaMenuProps) {
     if (loading || items && !items.length) return <Loading />
 
     return (
-        <nav className="mw-megamenu">
+        <div className="mw-megamenu">
             {items && items.map(level1 => {
                 const isActive = activeId === level1.id;
                 const layout = resolveDropdownLayout(level1.url, settings);
@@ -67,6 +67,6 @@ export function DesktopMegamenu({ items, loading = false }: MegaMenuProps) {
                     </div>
                 );
             })}
-        </nav>
+        </div>
     );
 }
