@@ -1,9 +1,25 @@
-import {Loading} from "./components/Loading.tsx";
-import {DesktopMegamenu} from "./components/DesktopMegamenu.tsx";
-import type {MegaMenuProps} from "./domain/megamenu.types.ts";
+import {MegamenuContent} from "./components/MegamenuContent.tsx";
+import {useWidgetConfig} from "./hooks/useWidgetConfig.ts";
+import {ConfigStateProvider} from "./state/Config/ConfigStateProvider.tsx";
+import {ErrorState} from "./components/global/ErrorState.tsx";
+import {Spinner} from "./components/global/Spinner.tsx";
+import {useMediaQuery} from "./hooks/ui/useMediaQuery.tsx";
+import {MobileMegamenu} from "./components/MobileMegamenu.tsx";
 
-export function MegamenuWidget({ items, loading = false }: MegaMenuProps) {
-    if (loading || items && !items.length) return <Loading />
+type Props = {
+    host: HTMLElement
+}
 
-    return <DesktopMegamenu items={items} />;
+export function MegamenuWidget({host}: Props) {
+    const {config, error, loading} = useWidgetConfig(host);
+    const isMobile = useMediaQuery('(max-width: 768px)');
+
+    if (!config) return null;
+    if (error) return <ErrorState />
+    if (loading) return <Spinner />
+
+    return <ConfigStateProvider settings={config?.settings?.theme}>
+        {!isMobile && <MegamenuContent items={config?.data.items} />}
+        {isMobile && <MobileMegamenu items={config?.data.items} />}
+    </ConfigStateProvider>;
 }

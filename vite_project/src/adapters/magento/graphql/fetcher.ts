@@ -7,7 +7,7 @@ export async function graphqlFetch<T>(
     query: string,
     variables?: Record<string, unknown>
 ): Promise<T> {
-    const res = await fetch("/graphql", {
+    const res = await fetch("https://mageos-docker.magsite.co.uk/graphql", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

@@ -54,6 +54,7 @@
         position: relative;
         left: 0;
         align-items: flex-start;
+        padding: 2rem;
     }
 
     .mw-megamenu-item {
@@ -70,5 +71,10 @@
 
     .mw-megamenu-item.menu-complex.is-active .mw-megamenu-dropdown {
         position: relative;
+    }
+
+    .mw-megamenu-item.menu-complex.is-active .mw-megamenu-dropdown {
+        grid-template-columns: repeat(2, minmax(0,200px));
+        padding: 12px 10px;
     }
 }
