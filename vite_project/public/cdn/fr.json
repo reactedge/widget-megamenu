@@ -170,12 +170,6 @@
         "label": "Soldes",
         "url": "/sale",
         "children": []
-      },
-      {
-        "id": "NDE=",
-        "label": "Terrasses",
-        "url": "/decking",
-        "children": []
       }
     ]
   },

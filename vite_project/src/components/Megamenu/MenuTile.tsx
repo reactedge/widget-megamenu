@@ -1,6 +1,4 @@
-import {useState} from "react";
 import {buildCategoryUrl} from "../../lib/url.ts";
-import {styles} from "./style.ts";
 import type {NavItem} from "../../domain/megamenu.types.ts";
 import {useConfigState} from "../../state/Config/useConfigState.ts";
 
@@ -9,33 +7,22 @@ type MenuTileProps = {
 };
 
 export function MenuTile({ item }: MenuTileProps) {
-    const [hovered, setHovered] = useState(false);
     const {settings} = useConfigState();
 
     return (
         <a
             href={buildCategoryUrl(item.url, settings)}
-            style={{
-                ...styles.tile,
-                ...(hovered ? styles.tileHover : {})
-            }}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+            className="mw-menu-tile"
         >
             {item.image && (
                 <img
                     src={item.image}
                     alt={item.label}
-                    style={styles.tileImage}
+                    className="mw-menu-tile__image"
                 />
             )}
 
-            <span
-                style={{
-                    ...styles.tileLabel,
-                    ...(hovered ? styles.tileLabelHover : {})
-                }}
-            >
+            <span className="mw-menu-tile__label">
                 {item.label}
             </span>
         </a>

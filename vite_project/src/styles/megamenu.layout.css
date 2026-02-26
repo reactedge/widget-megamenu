@@ -50,11 +50,16 @@
 @media (max-width: 768px) {
     .mw-megamenu {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 2rem;
         position: relative;
         left: 0;
         align-items: flex-start;
         padding: 2rem;
+    }
+
+    .mw-megamenu-dropdown {
+        background: none;
+        padding: 0;
     }
 
     .mw-megamenu-item {
