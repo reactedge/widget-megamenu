@@ -1,9 +1,26 @@
-import type {MegaMenuWidgetConfig} from "../domain/megamenu.types.ts";
+import type {ResolvedMegamenuConfig} from "../domain/megamenu.types.ts";
+import {activity} from "../activity";
+import {loadContract} from "../widget-runtime/lib/contractLoader.ts";
 import {WIDGET_ID} from "../mountWidget.tsx";
 
-export function extractConfig(hostElement: HTMLElement): MegaMenuWidgetConfig {
-    const configScript = hostElement.querySelector<HTMLScriptElement>(
-        'script[type="application/json"][data-config]'
+export async function readWidgetConfig(
+    hostElement: HTMLElement
+): Promise<ResolvedMegamenuConfig> {
+    let contract = null
+    try {
+        contract = await loadContract(hostElement);
+    } catch (e) {
+        contract = extractConfig()
+    }
+
+    activity('bootstrap', 'Config resolved', contract);
+
+    return Object.freeze(contract);
+}
+
+export function extractConfig() {
+    const configScript = document.querySelector<HTMLScriptElement>(
+        `script[type="application/json"][${WIDGET_ID}-data-config]`
     );
 
     if (!configScript?.textContent) {
@@ -24,7 +41,7 @@ export function extractConfig(hostElement: HTMLElement): MegaMenuWidgetConfig {
     return Object.freeze(parsed);
 }
 
-function isMegaMenuWidgetConfig(value: unknown): value is MegaMenuWidgetConfig {
+function isMegaMenuWidgetConfig(value: unknown): value is ResolvedMegamenuConfig {
     if (!isObject(value)) return false;
 
     const data = (value as any).data;

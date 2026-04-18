@@ -1,13 +1,13 @@
 import {useState} from "react";
-import {Loading} from "./Loading.tsx";
-import {getMenuType, resolveDropdownLayout} from "../lib/layout-resolver.ts";
-import {MenuItem} from "./MenuItem.tsx";
-import {MenuTile} from "./Megamenu/MenuTile.tsx";
-import {MenuLevelTwo} from "./Megamenu/MenuLevelTwo.tsx";
-import type {MegaMenuProps} from "../domain/megamenu.types.ts";
-import {useConfigState} from "../state/Config/useConfigState.ts";
+import type {MegaMenuProps} from "../../domain/megamenu.types.ts";
+import {useConfigState} from "../../state/Config/useConfigState.ts";
+import {Loading} from "../Loading.tsx";
+import {getMenuType, resolveDropdownLayout} from "../../lib/layout-resolver.ts";
+import {MenuItem} from "../MenuItem.tsx";
+import {MenuTile} from "../Megamenu/MenuTile.tsx";
+import {MenuLevelTwo} from "../Megamenu/MenuLevelTwo.tsx";
 
-export function DesktopMegamenu({ items, loading = false }: MegaMenuProps) {
+export function MegamenuContent({ items, loading = false }: MegaMenuProps) {
     const [activeId, setActiveId] = useState<string | null>(null);
     const {settings} = useConfigState();
 
@@ -29,8 +29,8 @@ export function DesktopMegamenu({ items, loading = false }: MegaMenuProps) {
                             isActive && "is-active",
                             `menu-${menuType}`
                         ].filter(Boolean).join(" ")}
-                        onMouseEnter={() => setActiveId(level1.id)}
-                        onMouseLeave={() => setActiveId(null)}
+                        onClick={() => setActiveId(level1.id)}
+                        /*onMouseLeave={() => setActiveId(null)}*/
                     >
                         <MenuItem
                             item={level1}

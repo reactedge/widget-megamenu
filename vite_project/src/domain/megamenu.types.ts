@@ -1,10 +1,12 @@
 
-export interface MegaMenuWidgetConfig {
-    readonly runtime: {
-        "platform": "wordpress" | "magento"
-    },
+export interface ResolvedMegamenuConfig {
+    readonly runtime: RuntimeConfig,
     readonly data: MegaMenuDataConfig;
-    readonly settings?: MegaMenuSettingsConfig;
+    readonly settings?: {theme: MegaMenuSettingsConfig};
+}
+
+export interface RuntimeConfig {
+    "platform": "wordpress" | "magento"
 }
 
 export interface MegaMenuDataConfig {
@@ -29,6 +31,10 @@ export type MegaMenuSettingsConfig = {
     };
 };
 
+export type MegamenuRuntimeConfig = {
+    platform: 'magento' | 'wordpress'
+}
+
 export type MenuType =
     | "none"
     | "simple-list"
@@ -37,7 +43,17 @@ export type MenuType =
 
 
 export type MegaMenuResponse = {
-    categoryList: any[];
+    categories: {
+        items: MegaMenuItem[]
+    };
+};
+
+export type MegaMenuItem = {
+    uid: string;
+    name: string;
+    url_path: string;
+    image: string
+    children: MegaMenuItem[]
 };
 
 export type MegaMenuProps = {
@@ -56,3 +72,11 @@ export type NavItem = {
         icon?: "arrow" | "external";
     }
 }
+
+export interface DrawerProps {
+    isOpen: boolean;
+    onClose: () => void;
+    side?: "left" | "right";
+    children: React.ReactNode;
+}
+
