@@ -36,6 +36,10 @@ function normalisePath(input: string): string {
 function isActiveItem(itemUrl: string | null): boolean {
     if (!itemUrl) return false;
 
+    if (itemUrl === "#" || itemUrl.startsWith("#")) {
+        return false;
+    }
+
     const currentPath = window.location.pathname;
 
     return normalisePath(itemUrl) === normalisePath(currentPath);

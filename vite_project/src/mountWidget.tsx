@@ -11,6 +11,5 @@ export async function mountWidget(hostElement: HTMLElement) {
     activity('bootstrap', 'Widget mounted', hostElement);
 
     const root = createRoot(mountedHost);
-
     root.render(<MegamenuWidget host={hostElement} />);
 }
