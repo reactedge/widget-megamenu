@@ -1,7 +1,6 @@
 import { mountWidget } from "./mountWidget";
 import {loadMagentoFonts} from "./services/fontLoader.ts";
 import {loadTranslations} from "./services/translationLoader.ts";
-import './styles/megamenu.css'
 
 class MegamenuUIWidget extends HTMLElement {
     connectedCallback() {
