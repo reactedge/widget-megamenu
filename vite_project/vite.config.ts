@@ -1,11 +1,16 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import pkg from './package.json';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+import pkg from './package.json'
+import { manifestPlugin } from './manifestPlugin'
 
+const widgetName = 'megamenu';
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    manifestPlugin({ widgetName }),
+  ],
   define: {
-    'process.env': {},
+    'process.env': {}
   },
   build: {
     outDir: "../www",
@@ -13,17 +18,16 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       entry: "src/widget.ts",
-      name: "WidgetMegaMenu",
-      fileName: () => `widget-megamenu@${pkg.version}.iife.js`,
+      fileName: () => `widget-${widgetName}@${pkg.version}.iife.js`,
       formats: ["iife"],
     },
     rollupOptions: {
       output: {
         inlineDynamicImports: true,
-        assetFileNames: "widget-megamenu.[ext]",
-      }
+        assetFileNames: `widget-${widgetName}.[ext]`,
+      },
     },
     minify: true,
     sourcemap: false
   }
-});
+})

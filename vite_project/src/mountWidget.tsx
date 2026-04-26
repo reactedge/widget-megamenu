@@ -5,6 +5,8 @@ import {getMountedHost} from "./lib/hostReader.ts";
 
 export const WIDGET_ID = 'megamenu';
 
+import './styles/megamenu.css'
+
 export async function mountWidget(hostElement: HTMLElement) {
     const mountedHost = getMountedHost(hostElement);
 
