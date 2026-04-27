@@ -1,7 +1,84 @@
 <body>
 <script type="module" src="./src/widget.ts"></script>
 
-<megamenu-widget data-instance="main-nav" data-contract="/cdn/fr.json">
+<script type="module">
+    export const registry = {
+        megamenu: {
+            cdn: '/cdn/fr.json'
+        }
+    };
+
+    import { mount } from './src/widget.ts';
+    import {loadContractByName} from './src/widget-runtime/lib/contractLoader.ts';
+
+    const el = document.querySelector('megamenu-widget');
+
+    const config = await loadContractByName('megamenu', registry);
+
+    mount(el, config);
+</script>
+<megamenu-widget
+        data-instance="main-nav">
+    <script type="application/json" megamenu-data-config>
+        {
+            "runtime": {
+                "platform": "wordpress"
+            },
+            "data": {
+                "items": [
+                    {
+                        "id": "1",
+                        "label": "Home",
+                        "url": "/",
+                        "children": []
+                    },
+                    {
+                        "id": "2",
+                        "label": "Services",
+                        "url": "/services",
+                        "children": [
+                            {
+                                "id": "21",
+                                "label": "Web Design",
+                                "url": "/services/web-design",
+                                "children": []
+                            },
+                            {
+                                "id": "22",
+                                "label": "SEO",
+                                "url": "/services/seo",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": "3",
+                        "label": "About",
+                        "url": "/about",
+                        "children": []
+                    },
+                    {
+                        "id": "4",
+                        "label": "Contact",
+                        "url": "/contact",
+                        "children": [],
+                        "meta": {
+                            "type": "cta"
+                        }
+                    }
+                ]
+            },
+            "settings": {
+                "theme": {
+                    "dataLocale" : "fr-FR",
+                    "fontColor": "#333",
+                    "primaryColor": "#1979c3",
+                    "secondaryColor": "#ff5501"
+                }
+            }
+        }
+    </script>
+
     <div class="widget-spinner"></div>
 </megamenu-widget>
 </body>

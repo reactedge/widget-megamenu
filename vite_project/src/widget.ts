@@ -1,13 +1,11 @@
 import { mountWidget } from "./mountWidget";
 import {loadMagentoFonts} from "./services/fontLoader.ts";
 import {loadTranslations} from "./services/translationLoader.ts";
+import type {ResolvedMegamenuConfig} from "./domain/megamenu.types.ts";
 
-class MegamenuUIWidget extends HTMLElement {
-    connectedCallback() {
-        loadMagentoFonts();
-        loadTranslations(this);
-        mountWidget(this);
-    }
+export async function mount(el: HTMLElement, config?: ResolvedMegamenuConfig) {
+    loadMagentoFonts();
+    loadTranslations(el);
+
+    await mountWidget(el, config)
 }
-
-customElements.define("megamenu-widget", MegamenuUIWidget);

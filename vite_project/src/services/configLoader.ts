@@ -1,15 +1,13 @@
 import type {ResolvedMegamenuConfig} from "../domain/megamenu.types.ts";
 import {activity} from "../activity";
-import {loadContract} from "../widget-runtime/lib/contractLoader.ts";
 import {WIDGET_ID} from "../mountWidget.tsx";
 
-export async function readWidgetConfig(
-    hostElement: HTMLElement
-): Promise<ResolvedMegamenuConfig> {
-    let contract = null
-    try {
-        contract = await loadContract(hostElement);
-    } catch (e) {
+export function readWidgetConfig(
+    rawConfig?: ResolvedMegamenuConfig
+): ResolvedMegamenuConfig | undefined {
+    let contract = rawConfig
+
+    if (contract === null) {
         contract = extractConfig()
     }
 
@@ -24,7 +22,7 @@ export function extractConfig() {
     );
 
     if (!configScript?.textContent) {
-        throw new Error(`[${WIDGET_ID}] requires a <script type="application/json" data-config> block.`);
+        throw new Error(`[${WIDGET_ID}] requires a <script type="application/json" ${WIDGET_ID}-data-config block.`);
     }
 
     let parsed: unknown;
