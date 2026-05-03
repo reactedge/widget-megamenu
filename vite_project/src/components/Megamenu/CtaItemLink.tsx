@@ -1,6 +1,4 @@
-import {buildCategoryUrl} from "../../lib/url.ts";
 import {renderIcon} from "./Icon.tsx";
-import {useConfigState} from "../../state/Config/useConfigState.ts";
 
 interface CtaLinkProps {
     url?: string;
@@ -9,11 +7,9 @@ interface CtaLinkProps {
 }
 
 export function CtaItemLink({ url, label, icon }: CtaLinkProps) {
-    const {settings} = useConfigState();
-
     return (
         <a
-            href={buildCategoryUrl(url, settings)}
+            href={url}
             className="mw-cta-link"
         >
             <span className="mw-cta-link__label">{label}</span>

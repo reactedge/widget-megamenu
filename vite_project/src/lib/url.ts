@@ -1,14 +1,5 @@
-import type {MegaMenuSettingsConfig, NavItem} from "../domain/megamenu.types.ts";
+import type {NavItem} from "../domain/megamenu.types.ts";
 
-export function buildCategoryUrl(
-    url: string | undefined,
-    config: MegaMenuSettingsConfig | undefined
-): string | undefined {
-    if (!url) return undefined;
-
-    const suffix = config?.urlSuffix ?? "";
-    return `${url}${suffix}`;
-}
 
 function normalisePath(input: string): string {
     try {

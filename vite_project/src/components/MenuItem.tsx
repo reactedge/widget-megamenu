@@ -1,9 +1,8 @@
 import {ParentMenuItem} from "./ParentMenuItem.tsx";
 import {ItemLink} from "./Megamenu/ItemLink.tsx";
-import {buildCategoryUrl, isInBreadCrumb} from "../lib/url.ts";
+import { isInBreadCrumb} from "../lib/url.ts";
 import {CtaItemLink} from "./Megamenu/CtaItemLink.tsx";
 import type {NavItem} from "../domain/megamenu.types.ts";
-import {useConfigState} from "../state/Config/useConfigState.ts";
 
 type MenuItemProps = {
     item: NavItem;
@@ -14,14 +13,12 @@ type MenuItemProps = {
 
 export function MenuItem(props: MenuItemProps) {
     const { item, isActive, isParent, hasSubmenu } = props;
-    const {settings} = useConfigState();
-    const url = buildCategoryUrl(item.url, settings);
 
-    if (!url) return null;
+    if (!item.url) return null;
 
     // CTA (special intent)
     if (item.meta?.type === "cta") {
-        return <CtaItemLink url={url} label={item.label} icon={item.meta?.icon} />;
+        return <CtaItemLink url={item.url} label={item.label} icon={item.meta?.icon} />;
     }
 
     // Parent with children
@@ -30,5 +27,5 @@ export function MenuItem(props: MenuItemProps) {
     }
 
     // Leaf
-    return <ItemLink url={url} label={item.label} isInBreadcrumb={isInBreadCrumb(item)} />;
+    return <ItemLink url={item.url} label={item.label} isInBreadcrumb={isInBreadCrumb(item)} />;
 }

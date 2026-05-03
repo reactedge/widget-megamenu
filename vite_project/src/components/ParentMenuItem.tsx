@@ -1,6 +1,5 @@
-import {buildCategoryUrl, isInBreadCrumb} from "../lib/url.ts";
+import {isInBreadCrumb} from "../lib/url.ts";
 import type {NavItem} from "../domain/megamenu.types.ts";
-import {useConfigState} from "../state/Config/useConfigState.ts";
 
 interface ParentMenuItemProps {
     isActive: boolean;
@@ -13,7 +12,6 @@ export function ParentMenuItem({
     isActive,
     hasSubmenu
 }: ParentMenuItemProps) {
-    const {settings} = useConfigState();
     const isBreadcrumb = isInBreadCrumb(item);
 
     const label = (
@@ -40,7 +38,7 @@ export function ParentMenuItem({
     if (!hasSubmenu && item.url) {
         return (
             <a
-                href={buildCategoryUrl(item.url, settings)}
+                href={item.url}
                 className="mw-parent-link"
             >
                 {label}
