@@ -3,11 +3,41 @@
     "platform": "magento"
   },
   "data": {
-    "items": []
+    "items": [
+      {
+        "id": "3",
+        "label": "Gear",
+        "url": "https://mageos-docker.magsite.co.uk/gear.html",
+        "image": null,
+        "children": [
+          {
+            "id": "4",
+            "label": "Bags",
+            "url": "https://mageos-docker.magsite.co.uk/gear/bags.html",
+            "image": "https://mageos-docker.magsite.co.uk/media/catalog/category/media/catalog/category/bag.jpg",
+            "children": []
+          },
+          {
+            "id": "5",
+            "label": "Fitness Equipment",
+            "url": "https://mageos-docker.magsite.co.uk/gear/fitness-equipment.html",
+            "image": "https://mageos-docker.magsite.co.uk/media/catalog/category/media/catalog/category/equipment.jpg",
+            "children": []
+          },
+          {
+            "id": "6",
+            "label": "Watches",
+            "url": "https://mageos-docker.magsite.co.uk/gear/watches.html",
+            "image": "https://mageos-docker.magsite.co.uk/media/catalog/category/media/catalog/category/watches.jpg",
+            "children": []
+          }
+        ]
+      }
+    ]
   },
   "settings": {
     "theme": {
-      "dataLocale" : "en-GB",
+      "dataLocale": "en-GB",
       "fontColor": "#333",
       "primaryColor": "#1979c3",
       "secondaryColor": "#ff5501",
