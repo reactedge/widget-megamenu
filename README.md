@@ -28,28 +28,35 @@ The widget is designed for **isolation, determinism, and safe navigation evoluti
 
 ---
 
-## Usage
+## Local development
 
-Embed the widget by including the custom element and pointing it to a **versioned script URL**:
+This project uses Node.js and npm.
 
-```html
-<nav class="site-navigation">
-    <megamenu-widget
-        data-load="eager"
-        data-src="https://widgets.example.com/widget-megamenu@X.Y.Z.iife.js"
-        data-menu="primary"
-    ></megamenu-widget>
-</nav>
+From the repository root:
 
-<script type="application/json" id="reactedge-config">
-{
-    "widgets": {
-        "megamenu": {
-            "api": "https://<navigation-api>/menus"
-        }
-    }
-}
-</script>
+```bash
+npm install
+```
+
+To run the widget locally:
+
+```bash
+cd vite_project
+npm install
+npm run dev
+```
+
+To run the widget in SSR mode:
+
+```bash
+cd widget-megamenu
+npm install
+NODE_TLS_REJECT_UNAUTHORIZED=0 npx tsx scripts/render-page.ts ../widgets-cdn/www/megamenu/contracts/fr.json
+```
+
+To run the test suite:
+```bash
+npx playwright test --config=tests/playwright.dev.config.ts
 ```
 
 | Host                   | Test to check it works                                                      | Notes on the component                                                                  |

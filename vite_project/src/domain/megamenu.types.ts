@@ -59,6 +59,7 @@ export type MegaMenuItem = {
 export type MegaMenuProps = {
     items: NavItem[] | undefined;
     loading?: boolean;
+    theme: MegaMenuSettingsConfig | undefined
 };
 
 export type NavItem = {

@@ -16,7 +16,7 @@ export function MegamenuWidget({rawConfig}: Props) {
     if (!config) return null;
 
     return <ConfigStateProvider settings={config?.settings?.theme}>
-        {!isMobile && <MegamenuContent items={config?.data.items} />}
-        {isMobile && <MobileMegamenu items={config?.data.items} />}
+        {!isMobile && <MegamenuContent items={config?.data.items} theme={config.settings?.theme} />}
+        {isMobile && <MobileMegamenu items={config?.data.items} theme={config.settings?.theme} />}
     </ConfigStateProvider>;
 }

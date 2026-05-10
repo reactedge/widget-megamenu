@@ -4,7 +4,7 @@ import type {MegaMenuProps} from "../domain/megamenu.types.ts";
 import {DrawerInline} from "./Drawer/DrawerInline.tsx";
 import {MegamenuContent} from "./MobileMegamenu/MenuContent.tsx";
 
-export function MobileMegamenu({ items, loading = false }: MegaMenuProps) {
+export function MobileMegamenu({ items, loading = false, theme }: MegaMenuProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     if (loading || (items && !items.length)) return <Loading />
@@ -24,7 +24,7 @@ export function MobileMegamenu({ items, loading = false }: MegaMenuProps) {
                 isOpen={isOpen}
                 onClose={() => setIsOpen(false)}
             >
-                <MegamenuContent items={items} />
+                <MegamenuContent items={items} theme={theme} />
             </DrawerInline>
         </>
     );

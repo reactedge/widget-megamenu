@@ -1,37 +1,48 @@
 import type {NavItem} from "../domain/megamenu.types.ts";
 
-
-function normalisePath(input: string): string {
+function normalisePath(
+    input: string,
+    origin?: string
+): string {
     try {
-        // Absolute URL → parse it
-        const url = new URL(input, window.location.origin);
+        const base =
+            origin ?? 'http://localhost';
 
-        // If same origin, return path only
-        if (url.origin === window.location.origin) {
-            const path =
-                (url.pathname.replace(/\/+$/, "") || "/") +
+        const url = new URL(input, base);
+
+        if (origin && url.origin === origin) {
+            return (
+                (url.pathname.replace(/\/+$/, '') || '/') +
                 url.search +
-                url.hash;
-
-            return path;
+                url.hash
+            );
         }
 
-        // External URL → keep as-is
+        if (!/^https?:/.test(input)) {
+            return (
+                (url.pathname.replace(/\/+$/, '') || '/') +
+                url.search +
+                url.hash
+            );
+        }
+
         return input;
     } catch {
-        // Relative path fallback
-        return input.replace(/\/+$/, "") || "/";
+        return input.replace(/\/+$/, '') || '/';
     }
 }
 
-function isActiveItem(itemUrl: string | null): boolean {
+function isActiveItem(itemUrl: string | null, origin?: string): boolean {
     if (!itemUrl) return false;
 
     if (itemUrl === "#" || itemUrl.startsWith("#")) {
         return false;
     }
 
-    const currentPath = window.location.pathname;
+    const base =
+        origin ?? 'http://localhost';
+
+    const currentPath = base;
 
     return normalisePath(itemUrl) === normalisePath(currentPath);
 }

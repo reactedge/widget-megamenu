@@ -3,9 +3,6 @@ import {MegamenuWidget} from "./MegamenuWidget.tsx";
 import {activity} from "./activity";
 import {getMountedHost} from "./lib/hostReader.ts";
 
-export const WIDGET_ID = 'megamenu';
-
-import './styles/megamenu.css'
 import type {ResolvedMegamenuConfig} from "./domain/megamenu.types.ts";
 
 export async function mountWidget(hostElement: HTMLElement, config?: ResolvedMegamenuConfig) {

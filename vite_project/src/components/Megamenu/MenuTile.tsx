@@ -1,3 +1,4 @@
+import React from 'react';
 import type {NavItem} from "../../domain/megamenu.types.ts";
 
 type MenuTileProps = {

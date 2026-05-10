@@ -1,3 +1,4 @@
+import React from 'react';
 import {useState} from "react";
 import {Loading} from "./Loading.tsx";
 import {getMenuType, resolveDropdownLayout} from "../lib/layout-resolver.ts";
@@ -5,19 +6,17 @@ import {MenuItem} from "./MenuItem.tsx";
 import {MenuTile} from "./Megamenu/MenuTile.tsx";
 import {MenuLevelTwo} from "./Megamenu/MenuLevelTwo.tsx";
 import type {MegaMenuProps} from "../domain/megamenu.types.ts";
-import {useConfigState} from "../state/Config/useConfigState.ts";
 
-export function MegamenuContent({ items, loading = false }: MegaMenuProps) {
+export function MegamenuContent({ items, loading = false, theme }: MegaMenuProps) {
     const [activeId, setActiveId] = useState<string | null>(null);
-    const {settings} = useConfigState();
 
-    if (loading || items && !items.length) return <Loading />
+    if (loading) return <Loading />
 
     return (
         <div className="mw-megamenu">
             {items && items.map(level1 => {
                 const isActive = activeId === level1.id;
-                const layout = resolveDropdownLayout(level1.url, settings);
+                const layout = resolveDropdownLayout(level1.url, theme);
                 const menuType = getMenuType(level1, layout);
                 const hasSubmenu = menuType !== "none";
 

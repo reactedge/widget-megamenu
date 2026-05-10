@@ -1,6 +1,7 @@
 import type {ResolvedMegamenuConfig} from "../domain/megamenu.types.ts";
 import {activity} from "../activity";
-import {WIDGET_ID} from "../mountWidget.tsx";
+
+export const WIDGET_ID = 'megamenu';
 
 export function readWidgetConfig(
     rawConfig?: ResolvedMegamenuConfig

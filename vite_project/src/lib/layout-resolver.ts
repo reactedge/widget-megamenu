@@ -4,7 +4,7 @@ export function resolveDropdownLayout(
     categoryUrl: string | undefined,
     config: MegaMenuSettingsConfig | undefined
 ): "list" | "tiles" {
-    if (!categoryUrl) return "list";
+    if (!categoryUrl || config === undefined) return "list";
 
     try {
         // 1. Parse URL (handles absolute URLs)

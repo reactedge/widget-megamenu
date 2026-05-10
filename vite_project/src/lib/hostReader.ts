@@ -1,10 +1,6 @@
-import {WIDGET_ID} from "../mountWidget.tsx";
+import {WIDGET_ID} from "../services/configLoader.ts";
 
 export function getMountedHost(hostElement: HTMLElement) {
     hostElement.classList.add(`reactedge-${WIDGET_ID}`);
     return hostElement;
-    const shadow =
-        hostElement.shadowRoot || hostElement.attachShadow({ mode: "open" });
-
-    return shadow
 }
