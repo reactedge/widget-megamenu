@@ -4,6 +4,8 @@ import {loadTranslations} from "./services/translationLoader.ts";
 import type {ResolvedMegamenuConfig} from "./domain/megamenu.types.ts";
 import {WIDGET_ID} from "./services/configLoader.ts";
 
+import "./styles/megamenu.css"
+
 const mount = async (el: HTMLElement, config?: ResolvedMegamenuConfig) => {
     loadMagentoFonts();
     loadTranslations(el);
