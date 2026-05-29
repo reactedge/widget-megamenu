@@ -1,15 +1,10 @@
-import {mountWidget} from "./mountWidget";
-import {loadMagentoFonts} from "./services/fontLoader.ts";
-import {loadTranslations} from "./services/translationLoader.ts";
+import {mountWidget} from "./mountWidget.tsx";
+import {WIDGET_ID} from "./Config.ts";
+
+import "./styles/widget.css"
 import type {ResolvedMegamenuConfig} from "./domain/megamenu.types.ts";
-import {WIDGET_ID} from "./services/configLoader.ts";
 
-import "./styles/megamenu.css"
-
-const mount = async (el: HTMLElement, config?: ResolvedMegamenuConfig) => {
-    loadMagentoFonts();
-    loadTranslations(el);
-
+const mount = async (el: HTMLElement, config: ResolvedMegamenuConfig) => {
     await mountWidget(el, config)
 }
 

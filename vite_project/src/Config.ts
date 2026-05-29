@@ -1,5 +1,5 @@
-import type {ResolvedMegamenuConfig} from "../domain/megamenu.types.ts";
-import {activity} from "../activity";
+import type {ResolvedMegamenuConfig} from "./domain/megamenu.types.ts";
+import {activity} from "./activity";
 
 export const WIDGET_ID = 'megamenu';
 

@@ -1,4 +1,4 @@
-import {WIDGET_ID} from "../services/configLoader.ts";
+import {WIDGET_ID} from "../Config.ts";
 
 const CDN_URL = 'https://widgets-cdn.co.uk:8459'
 export async function getCdnManifest() {
@@ -6,7 +6,9 @@ export async function getCdnManifest() {
 
     const configs = await Promise.all(
         manifest.contracts.map(async (contract: string) => {
+
             const data = await fetch(`${CDN_URL}/${WIDGET_ID}/contracts/${contract}`).then(r => r.json());
+
             return {
                 url: contract,
                 id: contract.split('/').pop(),
@@ -17,4 +19,9 @@ export async function getCdnManifest() {
     );
 
     return configs
+}
+
+export async function loadContract(name: string) {
+    const data = await fetch(`${CDN_URL}/${WIDGET_ID}/contracts/${name}`).then(r => r.json());
+    return data;
 }

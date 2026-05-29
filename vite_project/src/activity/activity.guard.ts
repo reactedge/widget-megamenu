@@ -1,5 +1,4 @@
-import {WIDGET_ID} from "../services/configLoader.ts";
-
+import {WIDGET_ID} from "../Config.ts";
 const debugTargets = getDebugTargets();
 
 function getDebugTargets(): string[] | null {

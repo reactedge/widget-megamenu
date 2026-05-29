@@ -1,7 +1,7 @@
 import {activity} from "../activity";
 import {hydrateRoot} from "react-dom/client";
 import type {ResolvedMegamenuConfig} from "../domain/megamenu.types.ts";
-import {MegamenuWidget} from "../MegamenuWidget.tsx";
+import {WidgetWrapper} from "../WidgetWrapper.tsx";
 
 export async function mountWidget(hostElement: HTMLElement, config: ResolvedMegamenuConfig) {
     const mountedHost = hostElement;
@@ -10,6 +10,6 @@ export async function mountWidget(hostElement: HTMLElement, config: ResolvedMega
 
     hydrateRoot(
         mountedHost,
-        <MegamenuWidget rawConfig={config} />
+        <WidgetWrapper rawConfig={config} />
     );
 }

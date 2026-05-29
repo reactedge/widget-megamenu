@@ -3,13 +3,13 @@ import {ConfigStateProvider} from "./state/Config/ConfigStateProvider.tsx";
 import {useMediaQuery} from "./hooks/ui/useMediaQuery.tsx";
 import {MobileMegamenu} from "./components/MobileMegamenu.tsx";
 import type {ResolvedMegamenuConfig} from "./domain/megamenu.types.ts";
-import {readWidgetConfig} from "./services/configLoader.ts";
+import {readWidgetConfig} from "./Config.ts";
 
 type Props = {
     rawConfig?: ResolvedMegamenuConfig
 }
 
-export function MegamenuWidget({rawConfig}: Props) {
+export function WidgetWrapper({rawConfig}: Props) {
     const config = readWidgetConfig(rawConfig);
     const isMobile = useMediaQuery('(max-width: 768px)');
 
