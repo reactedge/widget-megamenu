@@ -73,11 +73,3 @@ export type NavItem = {
         icon?: "arrow" | "external";
     }
 }
-
-export interface DrawerProps {
-    isOpen: boolean;
-    onClose: () => void;
-    side?: "left" | "right";
-    children: React.ReactNode;
-}
-

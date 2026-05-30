@@ -1,10 +1,9 @@
 import {mountWidget} from "./mountWidget.tsx";
-import {WIDGET_ID} from "./Config.ts";
+import {WIDGET_ID, type RawWidgetConfig} from "./Config.ts";
 
 import "./styles/widget.css"
-import type {ResolvedMegamenuConfig} from "./domain/megamenu.types.ts";
 
-const mount = async (el: HTMLElement, config: ResolvedMegamenuConfig) => {
+const mount = async (el: HTMLElement, config: RawWidgetConfig) => {
     await mountWidget(el, config)
 }
 

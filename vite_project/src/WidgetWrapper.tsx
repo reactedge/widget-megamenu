@@ -4,13 +4,15 @@ import {useMediaQuery} from "./hooks/ui/useMediaQuery.tsx";
 import {MobileMegamenu} from "./components/MobileMegamenu.tsx";
 import type {ResolvedMegamenuConfig} from "./domain/megamenu.types.ts";
 import {readWidgetConfig} from "./Config.ts";
+import {useActivityContext} from "./activity/Context/useActivityContext.ts";
 
 type Props = {
     rawConfig?: ResolvedMegamenuConfig
 }
 
 export function WidgetWrapper({rawConfig}: Props) {
-    const config = readWidgetConfig(rawConfig);
+    const activity = useActivityContext()
+    const config = readWidgetConfig(rawConfig, activity);
     const isMobile = useMediaQuery('(max-width: 768px)');
 
     if (!config) return null;

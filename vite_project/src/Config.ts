@@ -1,10 +1,22 @@
-import type {ResolvedMegamenuConfig} from "./domain/megamenu.types.ts";
-import {activity} from "./activity";
+import type {
+    MegaMenuDataConfig,
+    MegaMenuSettingsConfig,
+    ResolvedMegamenuConfig,
+    RuntimeConfig
+} from "./domain/megamenu.types.ts";
+import type {WidgetActivity} from "./activity";
 
 export const WIDGET_ID = 'megamenu';
 
+export interface RawWidgetConfig {
+    readonly runtime: RuntimeConfig,
+    readonly data: MegaMenuDataConfig;
+    readonly settings?: {theme: MegaMenuSettingsConfig};
+}
+
 export function readWidgetConfig(
-    rawConfig?: ResolvedMegamenuConfig
+    rawConfig?: ResolvedMegamenuConfig,
+    activity?: WidgetActivity
 ): ResolvedMegamenuConfig | undefined {
     let contract = rawConfig
 
@@ -12,7 +24,7 @@ export function readWidgetConfig(
         contract = extractConfig()
     }
 
-    activity('bootstrap', 'Config resolved', contract);
+    activity?.log('bootstrap', 'Config resolved', contract);
 
     return Object.freeze(contract);
 }
