@@ -1,5 +1,5 @@
 
-export interface ResolvedMegamenuConfig {
+export interface WidgetConfig {
     readonly runtime: RuntimeConfig,
     readonly data: MegaMenuDataConfig;
     readonly settings?: {theme: MegaMenuSettingsConfig};
@@ -52,7 +52,7 @@ export type MegaMenuItem = {
     uid: string;
     name: string;
     url_path: string;
-    image: string
+    image: string | null;
     children: MegaMenuItem[]
 };
 
@@ -66,7 +66,7 @@ export type NavItem = {
     id: string
     label: string
     url: string
-    image: string
+    image: string | null
     children: NavItem[]
     meta?: {
         type?: "link" | "cta" | "banner"

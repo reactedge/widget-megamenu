@@ -2,12 +2,12 @@ import {MegamenuContent} from "./components/MegamenuContent.tsx";
 import {ConfigStateProvider} from "./state/Config/ConfigStateProvider.tsx";
 import {useMediaQuery} from "./hooks/ui/useMediaQuery.tsx";
 import {MobileMegamenu} from "./components/MobileMegamenu.tsx";
-import type {ResolvedMegamenuConfig} from "./domain/megamenu.types.ts";
+import type {WidgetConfig} from "./domain/megamenu.types.ts";
 import {readWidgetConfig} from "./Config.ts";
 import {useActivityContext} from "./activity/Context/useActivityContext.ts";
 
 type Props = {
-    rawConfig?: ResolvedMegamenuConfig
+    rawConfig?: WidgetConfig
 }
 
 export function WidgetWrapper({rawConfig}: Props) {
